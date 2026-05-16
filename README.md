@@ -215,13 +215,6 @@ Inspired by:
 
 ---
 
-# License
-
-MIT License.
-
----
-
-# Author
 
 Developed for learning, research, and authorised security testing.
 
