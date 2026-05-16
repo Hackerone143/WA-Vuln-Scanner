@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoVulnX Report — http://httpbin.org/</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --border: #2d3147;
+    --text: #e2e8f0; --muted: #8892a4;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  body { background: var(--bg); color: var(--text); margin: 0; padding: 2rem; }
+  h1 { color: #60a5fa; margin-bottom: 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .summary { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .stat { background: var(--surface); border: 2px solid; border-radius: 8px;
+           padding: 1rem 1.5rem; text-align: center; min-width: 80px; }
+  .stat-num { display: block; font-size: 2rem; font-weight: 700; }
+  .stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  .section-title { color: #60a5fa; border-bottom: 1px solid var(--border);
+                     padding-bottom: 0.5rem; margin-top: 2rem; }
+  .card { background: var(--surface); border-radius: 8px; margin: 1rem 0;
+           padding: 1.25rem; border: 1px solid var(--border); }
+  .card-header { font-weight: 600; font-size: 1.05rem; margin-bottom: 1rem; }
+  .badge { display: inline-block; color: #fff; padding: 2px 10px;
+            border-radius: 4px; font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.5px; margin-right: 0.5rem; }
+  .detail-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .detail-table td { padding: 0.3rem 0.5rem; vertical-align: top; }
+  .attr { color: var(--muted); font-weight: 600; white-space: nowrap;
+           width: 130px; min-width: 130px; }
+  .detail-table tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.8rem; text-align: center; }
+  .disclaimer { background: #1f1208; border: 1px solid #7c3f00; border-radius: 6px;
+                  padding: 1rem; margin-bottom: 2rem; font-size: 0.85rem; color: #f6ad55; }
+</style>
+</head>
+<body>
+<h1>🔍 AutoVulnX Scan Report</h1>
+<div class="meta">
+  <strong>Target:</strong> http://httpbin.org/ &nbsp;|&nbsp;
+  <strong>Scanned:</strong> 2026-05-15 23:38:23 &nbsp;|&nbsp;
+  <strong>Total findings:</strong> 31
+</div>
+<div class="disclaimer">
+  ⚠️ <strong>Legal Notice:</strong> This report is intended solely for authorised security testing.
+  Scanning systems without explicit permission may violate laws and regulations.
+</div>
+<div class="summary"><div class="stat" style="border-color:#e67e22"><span class="stat-num">2</span><span class="stat-label">HIGH</span></div><div class="stat" style="border-color:#f1c40f"><span class="stat-num">2</span><span class="stat-label">MEDIUM</span></div><div class="stat" style="border-color:#3498db"><span class="stat-num">26</span><span class="stat-label">LOW</span></div><div class="stat" style="border-color:#95a5a6"><span class="stat-num">1</span><span class="stat-label">INFO</span></div></div>
+<h2 class="section-title">Security Headers</h2>
+<div class="card" style="border-left: 5px solid #e67e22;">
+  <div class="card-header"><span class="badge" style="background:#e67e22">HIGH</span> Security Headers</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/</td></tr>
+    <tr><td class="attr">description</td><td>HSTS is missing. Browsers may allow downgrade to HTTP.</td></tr>
+    <tr><td class="attr">recommendation</td><td>Add: Strict-Transport-Security: max-age=31536000; includeSubDomains</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #e67e22;">
+  <div class="card-header"><span class="badge" style="background:#e67e22">HIGH</span> Security Headers</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/</td></tr>
+    <tr><td class="attr">description</td><td>CSP header is absent. XSS and injection attacks are easier.</td></tr>
+    <tr><td class="attr">recommendation</td><td>Define a restrictive Content-Security-Policy.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #f1c40f;">
+  <div class="card-header"><span class="badge" style="background:#f1c40f">MEDIUM</span> Security Headers</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/</td></tr>
+    <tr><td class="attr">description</td><td>Missing X-Frame-Options. Site may be vulnerable to clickjacking.</td></tr>
+    <tr><td class="attr">recommendation</td><td>Add: X-Frame-Options: DENY  or  SAMEORIGIN</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #f1c40f;">
+  <div class="card-header"><span class="badge" style="background:#f1c40f">MEDIUM</span> Security Headers</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/</td></tr>
+    <tr><td class="attr">description</td><td>Missing X-Content-Type-Options. MIME-sniffing attacks possible.</td></tr>
+    <tr><td class="attr">recommendation</td><td>Add: X-Content-Type-Options: nosniff</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Security Headers</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/</td></tr>
+    <tr><td class="attr">description</td><td>No Referrer-Policy. Sensitive URL data may leak to third parties.</td></tr>
+    <tr><td class="attr">recommendation</td><td>Add: Referrer-Policy: no-referrer-when-downgrade</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Security Headers</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/</td></tr>
+    <tr><td class="attr">description</td><td>No Permissions-Policy. Browser features are unrestricted.</td></tr>
+    <tr><td class="attr">recommendation</td><td>Add a Permissions-Policy to limit camera, mic, geolocation, etc.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #95a5a6;">
+  <div class="card-header"><span class="badge" style="background:#95a5a6">INFO</span> Security Headers</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/</td></tr>
+    <tr><td class="attr">description</td><td>X-XSS-Protection is absent (deprecated but still checked by some scanners).</td></tr>
+    <tr><td class="attr">recommendation</td><td>Add: X-XSS-Protection: 1; mode=block  (or omit if CSP is strong)</td></tr>
+  </table>
+</div>
+<h2 class="section-title">Sensitive Files</h2>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.git/HEAD</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Git repository HEAD file exposed. Source code may be recoverable.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.git/config</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Git config file exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.svn/entries</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Subversion repository exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.hg/</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Mercurial repository exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.env</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. .env file exposed. May contain DB credentials, API keys, secrets.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.env.local</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. .env.local file exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.env.production</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. .env.production file exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/.env.backup</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. .env.backup file exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/config.php</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. config.php exposed. May contain database credentials.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/config.php.bak</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Backup config.php exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/wp-config.php</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. WordPress config exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/wp-config.php.bak</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. WordPress config backup exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/database.yml</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Rails database config exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/settings.py</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Django settings file exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/local_settings.py</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Django local settings exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/application.properties</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Spring Boot config exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/config.json</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. config.json exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/config.yaml</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. config.yaml exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/config.yml</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. config.yml exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/phpmyadmin/</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. phpMyAdmin panel exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/phpmyadmin</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. phpMyAdmin panel exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/adminer.php</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Adminer database tool exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/actuator</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Spring Boot Actuator endpoints exposed.</td></tr>
+  </table>
+</div>
+<div class="card" style="border-left: 5px solid #3498db;">
+  <div class="card-header"><span class="badge" style="background:#3498db">LOW</span> Sensitive File / Info Disclosure</div>
+  <table class="detail-table">
+    <tr><td class="attr">url</td><td>http://httpbin.org/actuator/env</td></tr>
+    <tr><td class="attr">description</td><td>Path returns 403 (Forbidden) — resource likely exists. Spring Boot env endpoint — may expose secrets.</td></tr>
+  </table>
+</div>
+
+<footer>Generated by AutoVulnX &mdash; For authorised testing only</footer>
+</body>
+</html>

@@ -1,0 +1,293 @@
+{
+  "tool": "AutoVulnX",
+  "target": "http://httpbin.org/",
+  "scan_time": "2026-05-15T23:38:23.485281",
+  "total_findings": 31,
+  "severity_summary": {
+    "HIGH": 2,
+    "MEDIUM": 2,
+    "LOW": 26,
+    "INFO": 1
+  },
+  "findings": [
+    {
+      "header": "Strict-Transport-Security",
+      "severity": "HIGH",
+      "description": "HSTS is missing. Browsers may allow downgrade to HTTP.",
+      "recommendation": "Add: Strict-Transport-Security: max-age=31536000; includeSubDomains",
+      "url": "http://httpbin.org/",
+      "present": false,
+      "actual_value": ""
+    },
+    {
+      "header": "Content-Security-Policy",
+      "severity": "HIGH",
+      "description": "CSP header is absent. XSS and injection attacks are easier.",
+      "recommendation": "Define a restrictive Content-Security-Policy.",
+      "url": "http://httpbin.org/",
+      "present": false,
+      "actual_value": ""
+    },
+    {
+      "header": "X-Frame-Options",
+      "severity": "MEDIUM",
+      "description": "Missing X-Frame-Options. Site may be vulnerable to clickjacking.",
+      "recommendation": "Add: X-Frame-Options: DENY  or  SAMEORIGIN",
+      "url": "http://httpbin.org/",
+      "present": false,
+      "actual_value": ""
+    },
+    {
+      "header": "X-Content-Type-Options",
+      "severity": "MEDIUM",
+      "description": "Missing X-Content-Type-Options. MIME-sniffing attacks possible.",
+      "recommendation": "Add: X-Content-Type-Options: nosniff",
+      "url": "http://httpbin.org/",
+      "present": false,
+      "actual_value": ""
+    },
+    {
+      "header": "Referrer-Policy",
+      "severity": "LOW",
+      "description": "No Referrer-Policy. Sensitive URL data may leak to third parties.",
+      "recommendation": "Add: Referrer-Policy: no-referrer-when-downgrade",
+      "url": "http://httpbin.org/",
+      "present": false,
+      "actual_value": ""
+    },
+    {
+      "header": "Permissions-Policy",
+      "severity": "LOW",
+      "description": "No Permissions-Policy. Browser features are unrestricted.",
+      "recommendation": "Add a Permissions-Policy to limit camera, mic, geolocation, etc.",
+      "url": "http://httpbin.org/",
+      "present": false,
+      "actual_value": ""
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.git/HEAD",
+      "path": "/.git/HEAD",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Git repository HEAD file exposed. Source code may be recoverable.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.git/config",
+      "path": "/.git/config",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Git config file exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.svn/entries",
+      "path": "/.svn/entries",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Subversion repository exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.hg/",
+      "path": "/.hg/",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Mercurial repository exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.env",
+      "path": "/.env",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. .env file exposed. May contain DB credentials, API keys, secrets.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.env.local",
+      "path": "/.env.local",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. .env.local file exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.env.production",
+      "path": "/.env.production",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. .env.production file exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/.env.backup",
+      "path": "/.env.backup",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. .env.backup file exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/config.php",
+      "path": "/config.php",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. config.php exposed. May contain database credentials.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/config.php.bak",
+      "path": "/config.php.bak",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Backup config.php exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/wp-config.php",
+      "path": "/wp-config.php",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. WordPress config exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/wp-config.php.bak",
+      "path": "/wp-config.php.bak",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. WordPress config backup exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/database.yml",
+      "path": "/database.yml",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Rails database config exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/settings.py",
+      "path": "/settings.py",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Django settings file exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/local_settings.py",
+      "path": "/local_settings.py",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Django local settings exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/application.properties",
+      "path": "/application.properties",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Spring Boot config exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/config.json",
+      "path": "/config.json",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. config.json exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/config.yaml",
+      "path": "/config.yaml",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. config.yaml exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/config.yml",
+      "path": "/config.yml",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. config.yml exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/phpmyadmin/",
+      "path": "/phpmyadmin/",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. phpMyAdmin panel exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/phpmyadmin",
+      "path": "/phpmyadmin",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. phpMyAdmin panel exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/adminer.php",
+      "path": "/adminer.php",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Adminer database tool exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/actuator",
+      "path": "/actuator",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Spring Boot Actuator endpoints exposed.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "severity": "LOW",
+      "url": "http://httpbin.org/actuator/env",
+      "path": "/actuator/env",
+      "status_code": 403,
+      "description": "Path returns 403 (Forbidden) \u2014 resource likely exists. Spring Boot env endpoint \u2014 may expose secrets.",
+      "snippet": "",
+      "vuln_type": "Sensitive File / Info Disclosure"
+    },
+    {
+      "header": "X-XSS-Protection",
+      "severity": "INFO",
+      "description": "X-XSS-Protection is absent (deprecated but still checked by some scanners).",
+      "recommendation": "Add: X-XSS-Protection: 1; mode=block  (or omit if CSP is strong)",
+      "url": "http://httpbin.org/",
+      "present": false,
+      "actual_value": ""
+    }
+  ]
+}
