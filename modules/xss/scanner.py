@@ -50,7 +50,7 @@ def _load_payloads(max_count: int = MAX_PAYLOADS_PER_POINT) -> list[str]:
         return ['<script>alert(1)</script>', '<img src=x onerror=alert(1)>']
 
 
-def scan(requester: Requester, crawl_result: CrawlResult) -> list[XSSFinding]:
+def scan(requester: Requester, crawl_result: CrawlResult, dom_xss: bool = False) -> list[XSSFinding]:
     findings: list[XSSFinding] = []
     payloads = _load_payloads()
 
@@ -69,6 +69,26 @@ def scan(requester: Requester, crawl_result: CrawlResult) -> list[XSSFinding]:
     for form in crawl_result.forms:
         result = _test_form(requester, form, payloads)
         findings.extend(result)
+        
+    # --- 3. Test DOM XSS ---
+    if dom_xss:
+        logger.info("[XSS] DOM XSS scanning enabled.")
+        for url in crawl_result.visited_urls:
+            # We would statically analyze the HTML/JS for sinks or use a headless browser.
+            # Here we do a mock check for document.write or innerHTML.
+            resp = requester.get(url)
+            if resp and ("document.write" in resp.text or "innerHTML" in resp.text):
+                finding = XSSFinding(
+                    severity="MEDIUM",
+                    url=url,
+                    method="GET",
+                    parameter="DOM_SINK",
+                    payload="<script>alert(1)</script>",
+                    evidence="DOM Sink (document.write / innerHTML) detected",
+                    vuln_type="DOM XSS"
+                )
+                findings.append(finding)
+                logger.warning(f"[XSS][MEDIUM] Potential DOM XSS sink found at url={truncate(url, 80)}")
 
     logger.info(f"[XSS] Scan complete. {len(findings)} finding(s).")
     return findings

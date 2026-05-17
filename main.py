@@ -59,6 +59,7 @@ def parse_args() -> argparse.Namespace:
     crawl_group = parser.add_argument_group("Crawler settings")
     crawl_group.add_argument("--max-pages", type=int, default=50, help="Max pages to crawl (default: 50)")
     crawl_group.add_argument("--max-depth", type=int, default=3,  help="BFS depth limit (default: 3)")
+    crawl_group.add_argument("--js-render", action="store_true", help="Enable JavaScript rendering (requires playwright)")
 
     # Request settings
     req_group = parser.add_argument_group("Request settings")
@@ -66,6 +67,10 @@ def parse_args() -> argparse.Namespace:
     req_group.add_argument("--timeout", type=int,   default=10,  help="Request timeout in seconds (default: 10)")
     req_group.add_argument("--proxy",   type=str,   default=None,help="HTTP proxy (e.g. http://127.0.0.1:8080)")
     req_group.add_argument("--no-verify", action="store_true",   help="Disable SSL certificate verification")
+    req_group.add_argument("--auth-cookie", type=str, default=None, help="Authentication cookie string")
+    req_group.add_argument("--waf-bypass", action="store_true", help="Enable WAF bypass techniques")
+    req_group.add_argument("--allow-internal", action="store_true", help="Allow scanning of internal/private IPs")
+    req_group.add_argument("--dom-xss", action="store_true", help="Enable DOM XSS detection (requires js-render)")
 
     # Output
     out_group = parser.add_argument_group("Output")
@@ -106,7 +111,7 @@ def main():
     logger = get_logger("main")
 
     # ── 1. Validate target ──
-    validator = TargetValidator()
+    validator = TargetValidator(allow_internal=args.allow_internal)
     try:
         target = validator.validate(args.url)
     except ValidationError as e:
@@ -126,6 +131,8 @@ def main():
         delay=args.delay,
         verify_ssl=not args.no_verify,
         proxy=args.proxy,
+        auth_cookie=args.auth_cookie,
+        waf_bypass=args.waf_bypass
     )
 
     # ── 3. Crawl ──
@@ -134,6 +141,7 @@ def main():
         base_url=target,
         max_pages=args.max_pages,
         max_depth=args.max_depth,
+        js_render=args.js_render
     )
     crawl_result = crawler.crawl()
 
@@ -148,7 +156,7 @@ def main():
 
     if modules.get("xss"):
         from modules.xss.scanner import scan as scan_xss
-        findings = scan_xss(requester, crawl_result)
+        findings = scan_xss(requester, crawl_result, dom_xss=args.dom_xss)
         report.add_findings("XSS", findings)
 
     if modules.get("sqli"):

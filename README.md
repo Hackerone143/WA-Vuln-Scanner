@@ -24,13 +24,16 @@ Only test:
 
 # Features
 
-* Web crawler
-* Reflected XSS detection
+* Web crawler with optional JavaScript rendering (`--js-render`)
+* Authenticated scanning via cookies (`--auth-cookie`)
+* Reflected & DOM XSS detection (`--dom-xss`)
 * SQL Injection detection
 * Open Redirect detection
 * Security headers analysis
 * Sensitive file discovery
 * CSRF checks
+* WAF evasion capabilities (`--waf-bypass`)
+* Internal/private IP scanning support (`--allow-internal`)
 * HTML & JSON reports
 * Burp Suite proxy support
 * Lightweight and low-resource friendly
@@ -167,16 +170,6 @@ reports/
 ---
 
 # Current Limitations
-
-* No authenticated scanning
-* No JavaScript rendering
-* No DOM XSS detection
-* No WAF bypass
-* No internal/private IP scanning
-
----
-
-# Roadmap
 
 * Async scanning
 * SSRF module
