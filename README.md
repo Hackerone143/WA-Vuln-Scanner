@@ -136,23 +136,6 @@ python main.py -u https://example.com --proxy http://127.0.0.1:8080 --no-verify
 
 ---
 
-# Project Structure
-
-```text
-AutoVulnX/
-│
-├── core/
-├── modules/
-├── payloads/
-├── reports/
-├── utils/
-├── main.py
-├── requirements.txt
-└── README.md
-```
-
----
-
 # Output
 
 AutoVulnX supports:
